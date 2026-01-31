@@ -94,15 +94,34 @@ class MadeByWidget extends HTMLElement {
       return;
     }
 
-    // Auto-detect system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      container.classList.add('dark');
-    }
+    // Detect dark mode from page or system
+    const isDark = () => {
+      const html = document.documentElement;
+      // Check common page-level theme patterns
+      if (html.getAttribute('data-theme') === 'dark') return true;
+      if (html.getAttribute('data-theme') === 'light') return false;
+      if (html.classList.contains('dark')) return true;
+      // Fallback to OS preference
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
 
-    // Listen for changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    container.classList.toggle('dark', isDark());
+
+    // Watch for page-level theme changes (data-theme, class)
+    this._themeObserver = new MutationObserver(() => {
       if (!this.hasAttribute('dark')) {
-        container.classList.toggle('dark', e.matches);
+        container.classList.toggle('dark', isDark());
+      }
+    });
+    this._themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'class']
+    });
+
+    // Watch for OS-level preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!this.hasAttribute('dark')) {
+        container.classList.toggle('dark', isDark());
       }
     });
   }
@@ -358,12 +377,12 @@ class MadeByWidget extends HTMLElement {
           width: 2.5rem;
           height: 100%;
           background: rgba(255, 255, 255, 0.2);
-          transform: rotate(12deg) translateX(3rem);
+          transform: translateX(3rem) rotate(12deg);
           transition: transform 0.7s ease-out;
         }
 
         .cta-btn:hover .cta-shine {
-          transform: rotate(12deg) translateX(-14rem);
+          transform: translateX(-14rem) rotate(12deg);
         }
       </style>
     `;

@@ -57,6 +57,29 @@ Works anywhere with a single `<script>` tag.
 | `source` | (auto: hostname) | Custom source for tracking |
 | `dark` | (auto-detects) | Force dark mode |
 
+### Dark / Light Mode
+
+The widget automatically matches your site's theme using this detection order:
+
+1. **`dark` attribute on the widget** — if set, the widget is always dark, no auto-detection
+2. **`data-theme` on `<html>`** — if your site sets `data-theme="dark"` or `data-theme="light"` on the `<html>` element, the widget follows it
+3. **`class="dark"` on `<html>`** — if your site uses Tailwind's default dark mode (adding/removing the `dark` class on `<html>`), the widget follows it
+4. **OS preference** — falls back to `prefers-color-scheme: dark`
+
+The widget watches for changes live via a `MutationObserver`, so toggling your site's theme will update the widget instantly — no page reload needed.
+
+**Examples:**
+
+```html
+<!-- Always dark -->
+<made-by-widget dark></made-by-widget>
+
+<!-- Auto-detect (works with data-theme or class="dark" on <html>) -->
+<made-by-widget></made-by-widget>
+```
+
+If your site uses a different attribute for theming (e.g. `data-mode` or `data-color-scheme`), you would need to adapt the widget's `setupDarkMode()` function.
+
 ### Profile Photo
 
 If no `photo` attribute is provided, the widget looks for an image file named `remi-valade-square.jpg` next to the JS file. You can handle the photo in two ways:
