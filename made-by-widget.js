@@ -349,9 +349,10 @@ class MadeByWidget extends HTMLElement {
           z-index: 10;
         }
 
-        /* Shine Effect */
-        .cta-shine {
+        /* Shine Effect - must override .cta-btn span */
+        .cta-btn .cta-shine {
           position: absolute;
+          z-index: 1;
           top: 0;
           right: 0;
           width: 2.5rem;
