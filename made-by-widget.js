@@ -7,7 +7,7 @@
  *   <script src="made-by-widget.js"></script>
  *   <made-by-widget
  *     name="Rémi"
- *     subtitle="Senior Marketer who likes to do things"
+ *     subtitle="Senior Marketer who turns ambiguity into systems"
  *     photo="https://..."
  *     linkedin="remivalade"
  *     twitter="remivalade"
@@ -20,7 +20,7 @@
  *
  * Attributes:
  *   - name: Display name (default: "Rémi")
- *   - subtitle: Tagline text (default: "Senior Marketer who likes to do things")
+ *   - subtitle: Tagline text (default: "Senior Marketer who turns ambiguity into systems")
  *   - label: Collapsed state text (default: "Let's talk")
  *   - photo: Profile image URL
  *   - linkedin: LinkedIn username (optional)
@@ -72,9 +72,9 @@ class MadeByWidget extends HTMLElement {
 
   // Getters for attributes with defaults
   get name() { return this.getAttribute('name') || 'Rémi'; }
-  get subtitle() { return this.getAttribute('subtitle') || 'Senior Marketer who likes to do things'; }
+  get subtitle() { return this.getAttribute('subtitle') || 'Senior Marketer who turns ambiguity into systems'; }
   get label() { return this.getAttribute('label') || "Let's talk"; }
-  get photo() { return this.getAttribute('photo') || 'https://irys.portrait.host/FEQnDav4onGWwukVL1-p1ytDMaZu6Cai0AxvUPMRemw'; }
+  get photo() { return this.getAttribute('photo') || new URL('remi-valade-square.jpg', MadeByWidget._scriptBase).href; }
   get linkedin() { return this.getAttribute('linkedin'); }
   get twitter() { return this.getAttribute('twitter'); }
   get telegram() { return this._decode(this.getAttribute('tg')); }
@@ -448,6 +448,11 @@ class MadeByWidget extends HTMLElement {
     this.shadowRoot.innerHTML = styles + html;
   }
 }
+
+// Capture script base URL for resolving relative assets (must run at load time)
+MadeByWidget._scriptBase = document.currentScript && document.currentScript.src
+  ? document.currentScript.src
+  : '';
 
 // Register the custom element
 customElements.define('made-by-widget', MadeByWidget);
