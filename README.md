@@ -43,8 +43,8 @@ Works anywhere with a single `<script>` tag.
 
 | Attribute | Default | Description |
 |-----------|---------|-------------|
-| `name` | "Rémi" | Display name in greeting |
-| `subtitle` | "Senior Marketer who turns ambiguity into systems" | Tagline text |
+| `name` | "JaneDoe" | Display name in greeting |
+| `subtitle` | "Cool human who likes shiny buttons" | Tagline text |
 | `label` | "Let's talk" | Text shown in collapsed state |
 | `photo` | (relative to script) | Profile image URL (see below) |
 | `linkedin` | - | LinkedIn username |
