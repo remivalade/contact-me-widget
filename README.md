@@ -1,5 +1,6 @@
 # Reusable "Made By" Module
 
+A small widget to display on websites so people can contact you. Includes contact obfuscation so scrapping bots cannot copy your email or telegram (at least the not clever ones). 
 
 Created as a **Web Component:** Best for any website - Hugo, Jekyll, WordPress, plain HTML, or even React/Vue.
 
